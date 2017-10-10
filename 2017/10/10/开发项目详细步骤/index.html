@@ -22,7 +22,7 @@
 <meta property="og:site_name" content="记录每次成长">
 <meta property="og:description" content="gulp（官网）是一种自动编译项目的任务工作流，是一种以任务为单位，在node环境下进行执行的工作流，借助一些插件可以帮助开发者进行less的编译、提取htnl公共部分、图片压缩、文件合并、自动刷新浏览器等工作  (一)在全局安装 如果没有安装node.js的需要先下载安装node.js 打开cdm命令面板，在全局安装gulp-cli1$ npm install --global gulp-cl">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-10-10T16:35:32.037Z">
+<meta property="og:updated_time" content="2017-10-10T16:36:59.842Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="gulp开发项目的详细教程">
 <meta name="twitter:description" content="gulp（官网）是一种自动编译项目的任务工作流，是一种以任务为单位，在node环境下进行执行的工作流，借助一些插件可以帮助开发者进行less的编译、提取htnl公共部分、图片压缩、文件合并、自动刷新浏览器等工作  (一)在全局安装 如果没有安装node.js的需要先下载安装node.js 打开cdm命令面板，在全局安装gulp-cli1$ npm install --global gulp-cl">
@@ -80,7 +80,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://yoursite.com/2017/10/10/开发项目详细步骤/" data-id="cj8ltvi590002c4utqrvlr6p5" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2017/10/10/开发项目详细步骤/" data-id="cj8ltxawi000198ute3kk38zr" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -133,13 +133,11 @@
 </li>
 </ol>
 <h3 id="gulp中的插件"><a href="#gulp中的插件" class="headerlink" title="gulp中的插件"></a>gulp中的插件</h3><blockquote>
-<p>在使用gulp插件的时候，首先在cmd的项目根目录下执行<code>$ npm  i -S 插件名</code>来下载插件，在gulpfile.js文件中写入<code>var 变量名 =         require(&#39;插件名&#39;)</code>来引入插件<br>注：以下代码放在gulpfile.js文件中</p>
+<p>在使用gulp插件的时候，首先在cmd的项目根目录下执行<code>$ npm  i -S 插件名</code>来下载插件，在gulpfile.js文件中写入<code>var 变量名 =         require(&#39;插件名&#39;)</code>来引入插件<br>注：以下代码放在gulpfile.js文件中<br> 1.gulp-less：用来编译less文件<br>   gulp-csso：压缩css文件</p>
 </blockquote>
-<p> 1.gulp-less：用来编译less文件<br>   gulp-csso：压缩css文件</p>
    <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> less = <span class="built_in">require</span>(<span class="string">'gulp-less'</span>);</div><div class="line"><span class="keyword">var</span> cssMinify = <span class="built_in">require</span>(<span class="string">'gulp-csso'</span>);</div><div class="line">gulp.task(<span class="string">'less'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  gulp.src(<span class="string">'src/css/*.less'</span>)</div><div class="line">  .pipe(less())</div><div class="line">  .pipe(cssMinify())</div><div class="line">  .pipe(gulp.dest(<span class="string">'./dist/css'</span>))</div><div class="line">&#125;)</div><div class="line"><span class="comment">//将css下所有的less文件编译、压缩成css文件放到dist下的css文件下</span></div></pre></td></tr></table></figure>
 <ol>
-<li><p><a href="https://github.com/sindresorhus/gulp-nunjucks" target="_blank" rel="external">gulp-nunjucks</a>：用来提取html的公共部分</p>
-<blockquote>
+<li><a href="https://github.com/sindresorhus/gulp-nunjucks" target="_blank" rel="external">gulp-nunjucks</a>：用来提取html的公共部分<blockquote>
 <ul>
 <li>然后把页面中公共的部分一块一块提取出来独立的放到 _partials 目录中；</li>
 <li>将创建的模板放到_layouts中,模板中放入相同的代码，不同的地方写入 （这里指的是head部分）<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">   <span class="comment">//* 在源代码中的html最上面写入&#123;% extends "./_layouts/base.html" %&#125;在 &#123;% block head %&#125;&#123;% endblock %&#125;的中间填入不同的代码  </span></div><div class="line">    <span class="keyword">var</span> nunjucks = <span class="built_in">require</span>(<span class="string">'gulp-nunjucks'</span>);</div><div class="line">    gulp.task(<span class="string">'html'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">       gulp.src(<span class="string">'./src/*.html'</span>)</div><div class="line">     .pipe(nunjucks.compile())</div><div class="line">    .pipe(gulp.dest(<span class="string">'./dist/'</span>))</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
@@ -147,6 +145,8 @@
 </ul>
 </blockquote>
 </li>
+</ol>
+<ol>
 <li><p><a href="https://browsersync.io/docs/gulp" target="_blank" rel="external">browser-sync</a>:当监视的文件发生变化后自动刷新浏览器</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">      <span class="keyword">var</span> browserSync = <span class="built_in">require</span>(<span class="string">'browser-sync'</span>).create();</div><div class="line">      gulp.task(<span class="string">'default'</span>, [<span class="string">'less'</span>, <span class="string">'html'</span>, <span class="string">'vendor'</span>, <span class="string">'imagemin'</span>, <span class="string">'js'</span>], <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">       browserSync.init(&#123;</div><div class="line">          server: &#123;</div><div class="line">         baseDir: <span class="string">"./dist/"</span>, </div><div class="line">         <span class="comment">// baseDir 就是用来设置类似 Apache 的 www 目录的，该目录下的文件都可以通过 WEB 的方式来访问</span></div><div class="line">        middleware: [jsonPlaceholderProxy]<span class="comment">//配置这个是用来解决跨域问题</span></div><div class="line">  &#125;,</div><div class="line">  files: <span class="string">'./dist/'</span>, <span class="comment">// 让 browser-sync 监视指定的文件或目录</span></div><div class="line">  port: <span class="number">8080</span> <span class="comment">//可以指定浏览器</span></div><div class="line">&#125;)</div></pre></td></tr></table></figure>
 </li>
