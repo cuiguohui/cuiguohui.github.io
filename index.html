@@ -81,7 +81,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://yoursite.com/2017/10/10/开发项目详细步骤/" data-id="cj8ltiaev0000igutpxk71y87" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2017/10/10/开发项目详细步骤/" data-id="cj8ltrnof0000y0utbwnbhms9" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -124,10 +124,8 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gulp.dest([<span class="string">'./dits/'</span>])//将通过gulp.src读取的文件放到指定的文件下</div></pre></td></tr></table></figure>
 </li>
 <li><p>gulp.task:通过其建立一个个任务，然后再cmd中执行相应的任务，完成相应的过程</p>
-</li>
-</ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">gulp.task(<span class="string">'copy'</span>,<span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">  console.log(<span class="string">'2222'</span>);//在cmd中执行`gulp copy`即可打印出``2222``</div><div class="line">  //有依赖任务，若想让d在a、b、c之后执行，需要在a、b、c的任务中加入`<span class="built_in">return</span>`</div><div class="line">  gulp.task(<span class="string">'d'</span>, [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>], <span class="function"><span class="title">function</span></span> () &#123;</div><div class="line">     console.log(<span class="string">'ddd end'</span>)</div><div class="line">  &#125;)</div></pre></td></tr></table></figure>
-<ol>
+</li>
 <li><p>gulp.watch:用来监视某个文件的变化，当文件发生变化触发任务</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">   gulp.watch(<span class="string">'src/*.html'</span>, <span class="keyword">function</span> (event) &#123;</div><div class="line">       gulp.src(event.path)</div><div class="line">      .pipe(nunjucks.compile())</div><div class="line">      .pipe(gulp.dest(<span class="string">'./dist/'</span>))</div><div class="line">&#125;) </div><div class="line">//监视src下的所有html文件，当某一个文件发生变化的时候，会将发生变化的文件渲染到dist文件夹下</div></pre></td></tr></table></figure>
 </li>
@@ -138,14 +136,14 @@
 <h3 id="gulp中的插件"><a href="#gulp中的插件" class="headerlink" title="gulp中的插件"></a>gulp中的插件</h3><blockquote>
 <p>在使用gulp插件的时候，首先在cmd的项目根目录下执行<code>$ npm  i -S 插件名</code>来下载插件，在gulpfile.js文件中写入<code>var 变量名 =         require(&#39;插件名&#39;)</code>来引入插件<br>注：以下代码放在gulpfile.js文件中</p>
 </blockquote>
-<p>1.gulp-less：用来编译less文件<br>gulp-csso：压缩css文件</p>
+<p>1.gulp-less：用来编译less文件<br> gulp-csso：压缩css文件</p>
   <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> less = <span class="built_in">require</span>(<span class="string">'gulp-less'</span>);</div><div class="line"><span class="keyword">var</span> cssMinify = <span class="built_in">require</span>(<span class="string">'gulp-csso'</span>);</div><div class="line">gulp.task(<span class="string">'less'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  gulp.src(<span class="string">'src/css/*.less'</span>)</div><div class="line">  .pipe(less())</div><div class="line">  .pipe(cssMinify())</div><div class="line">  .pipe(gulp.dest(<span class="string">'./dist/css'</span>))</div><div class="line">&#125;)</div><div class="line"><span class="comment">//将css下所有的less文件编译、压缩成css文件放到dist下的css文件下</span></div></pre></td></tr></table></figure>
 <ol>
 <li><p><a href="https://github.com/sindresorhus/gulp-nunjucks" target="_blank" rel="external">gulp-nunjucks</a>：用来提取html的公共部分</p>
 <blockquote>
 <ul>
 <li>然后把页面中公共的部分一块一块提取出来独立的放到 _partials 目录中；</li>
-<li>将创建的模板放到_layouts中,模板中放入相同的代码，不同的地方写入 （这里指的是head部分）<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">     <span class="comment">//* 在源代码中的html最上面写入&#123;% extends "./_layouts/base.html" %&#125;在 &#123;% block head %&#125;&#123;% endblock %&#125;的中间填入不同的代码  </span></div><div class="line">      <span class="keyword">var</span> nunjucks = <span class="built_in">require</span>(<span class="string">'gulp-nunjucks'</span>);</div><div class="line">      gulp.task(<span class="string">'html'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">‘ +    .pipe(nunjucks.compile())</div><div class="line">    .pipe(gulp.dest(<span class="string">'./dist/'</span>))</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<li>将创建的模板放到_layouts中,模板中放入相同的代码，不同的地方写入 （这里指的是head部分）<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">   <span class="comment">//* 在源代码中的html最上面写入&#123;% extends "./_layouts/base.html" %&#125;在 &#123;% block head %&#125;&#123;% endblock %&#125;的中间填入不同的代码  </span></div><div class="line">    <span class="keyword">var</span> nunjucks = <span class="built_in">require</span>(<span class="string">'gulp-nunjucks'</span>);</div><div class="line">    gulp.task(<span class="string">'html'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">       gulp.src(<span class="string">'./src/*.html'</span>)</div><div class="line">     .pipe(nunjucks.compile())</div><div class="line">    .pipe(gulp.dest(<span class="string">'./dist/'</span>))</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
 </li>
 </ul>
 </blockquote>
@@ -154,7 +152,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">      <span class="keyword">var</span> browserSync = <span class="built_in">require</span>(<span class="string">'browser-sync'</span>).create();</div><div class="line">      gulp.task(<span class="string">'default'</span>, [<span class="string">'less'</span>, <span class="string">'html'</span>, <span class="string">'vendor'</span>, <span class="string">'imagemin'</span>, <span class="string">'js'</span>], <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">       browserSync.init(&#123;</div><div class="line">          server: &#123;</div><div class="line">         baseDir: <span class="string">"./dist/"</span>, </div><div class="line">         <span class="comment">// baseDir 就是用来设置类似 Apache 的 www 目录的，该目录下的文件都可以通过 WEB 的方式来访问</span></div><div class="line">        middleware: [jsonPlaceholderProxy]<span class="comment">//配置这个是用来解决跨域问题</span></div><div class="line">  &#125;,</div><div class="line">  files: <span class="string">'./dist/'</span>, <span class="comment">// 让 browser-sync 监视指定的文件或目录</span></div><div class="line">  port: <span class="number">8080</span> <span class="comment">//可以指定浏览器</span></div><div class="line">&#125;)</div></pre></td></tr></table></figure>
 </li>
 <li><p><a href="https://github.com/sindresorhus/gulp-imagemin" target="_blank" rel="external">gulp-imagemin</a>:压缩图片</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">     <span class="keyword">var</span> imagemin = <span class="built_in">require</span>(<span class="string">'gulp-imagemin'</span>);</div><div class="line">     gulp.task(<span class="string">'imagemin'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">     gulp.src(<span class="string">'./src/img/*'</span>, &#123; <span class="attr">base</span>: <span class="string">'./src'</span> &#125;)</div><div class="line">    .pipe(imagemin())</div><div class="line">    .pipe(gulp.dest(<span class="string">'./dist'</span>))</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">    <span class="keyword">var</span> imagemin = <span class="built_in">require</span>(<span class="string">'gulp-imagemin'</span>);</div><div class="line">    gulp.task(<span class="string">'imagemin'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    gulp.src(<span class="string">'./src/img/*'</span>, &#123; <span class="attr">base</span>: <span class="string">'./src'</span> &#125;)</div><div class="line">   .pipe(imagemin())</div><div class="line">   .pipe(gulp.dest(<span class="string">'./dist'</span>))</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
 </li>
 <li><p><a href="https://www.npmjs.com/package/http-proxy-middleware" target="_blank" rel="external">http-proxy-middleware</a>:配置代理解决跨域问题</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">     <span class="keyword">var</span> proxy = <span class="built_in">require</span>(<span class="string">'http-proxy-middleware'</span>);</div><div class="line">     <span class="keyword">var</span> jsonPlaceholderProxy = proxy(<span class="string">'/api'</span>, &#123;</div><div class="line">  target: <span class="string">'http://api.botue.com'</span>,</div><div class="line">  changeOrigin: <span class="literal">true</span>,</div><div class="line">  pathRewrite: &#123;</div><div class="line">    <span class="string">'/api'</span>: <span class="string">''</span>, <span class="comment">// rewrite path</span></div><div class="line">  &#125;,</div><div class="line">  logLevel: <span class="string">'debug'</span></div><div class="line">&#125;)</div><div class="line"><span class="comment">//这里的pathRewrite和 target根据具体的项目来配置，也就是后端提供的网址</span></div></pre></td></tr></table></figure>
@@ -196,7 +194,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://yoursite.com/2017/10/08/前端必读的书籍/" data-id="cj8ltiagb0001igutsuqt911q" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2017/10/08/前端必读的书籍/" data-id="cj8ltrnpl0002y0utwwagtdex" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -327,7 +325,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://yoursite.com/2017/10/07/hello-world/" data-id="cj8ltiagn0002igutrdp4zdni" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2017/10/07/hello-world/" data-id="cj8ltrnpi0001y0utsa2sw11f" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
